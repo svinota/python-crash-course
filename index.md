@@ -35,10 +35,39 @@ Some of the `logging` module features:
 * supports different output destinations: file, stderr, syslog
 * available as a part of the stdlib
 
+By default, one will not get the debug or info messages in the log.
+To turn them on, one should use `logging.basicConfig()`:
+```
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+```
+
 traceback
 =========
 
-td
+The typical usage of the `traceback` module is the `try … except`
+statement:
+```
+    import logging
+    import traceback
+
+    try:
+        do_whatever()
+    except:
+        logging.error(traceback.format_exc())
+        do_cleanup()
+```
+
+But that's not all. One can use it in the ordinary code to get
+tracebacks while in the process:
+```
+    import logging
+    import traceback
+
+    def some_func():
+        do_whatever()
+        logging.debug(''.join(traceback.format_stack()))
+```
 
 gc
 ==
