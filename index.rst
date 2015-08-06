@@ -2,13 +2,13 @@ python debug technics, different perspectives
 ---------------------------------------------
 
 1. Runtime perspective
-    1.1. Post-mortem analysis [p]
-    1.2. Runtime analysis
-        1.2.1. step-by-step debug [d]
-        1.2.2. one-shot analysis [s]
+    1. Post-mortem analysis [p]
+    2. Runtime analysis
+        1. step-by-step debug [d]
+        2. one-shot analysis [s]
 2. Code change perspective
-    2.1. Invasive — require code change [i]
-    2.2. Non-invasive — don't require any code change [n]
+    1. Invasive — require code change [i]
+    2. Non-invasive — don't require any code change [n]
 
 Python modules:
 
