@@ -12,13 +12,13 @@ python debug technics, different perspectives
 
 Python modules:
 
-[p,i] logging
-[p,s,i] traceback
-[p,s,i] gc
-[p,s,i] meliae
-[d,i] pdb
-[d,i] rpdb2
-[s,n] pyrasite
+* [p,i] logging
+* [p,s,i] traceback
+* [p,s,i] gc
+* [p,s,i] meliae
+* [d,i] pdb
+* [d,i] rpdb2
+* [s,n] pyrasite
 
 Modules and tools
 =================
