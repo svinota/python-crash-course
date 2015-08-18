@@ -105,22 +105,108 @@ gc map into a json file and/or load and analyze it:
     print(om.summarize())
 ```
 
-pdb
-===
+pdb, rpdb2
+==========
 
-td
+There are several Python debuggers, but mostly known are `pdb` and
+`rpdb2`. They both have similar approach and similar technics, but
+`rpdb2` has several advantages over `pdb`:
 
-rpdb2
-=====
+* threads support
+* graphical interface
+* remote debugging
 
-td
+To start an embedded debugger session:
+```
+    import pdb
+    do_whatever()
+    pdb.set_trace()
+    do_other_stuff()
+```
+
+This will start an interactive `pdb` console. In order to do so, one
+should start the process also in the foreground on a console.
+
+To do the same with `rpdb2`:
+```
+    import rpdb2
+    do_whatever()
+    rpdb2.start_embedded_debugger('secret', fAllowRemote=True)
+    do_other_stuff()
+```
+
+Unlike `pdb`, the `rpdb2` debugger will not start an interactive
+console, but will allow you to attach to the process from GUI or CLI:
+```
+$ rpdb2
+RPDB2 - The Remote Python Debugger, version RPDB_2_4_8,
+Copyright (C) 2005-2009 Nir Aides.
+Type "help", "copyright", "license", "credits" for more information.
+
+> password secret
+Password is set to: "secret"
+
+> host 10.0.0.1
+
+> attach
+Connecting to '10.0.0.1'...
+Scripts to debug on '10.0.0.1':
+
+   pid    name
+--------------------------
+   21515  /home/user/test.py
+
+> attach 21515
+...
+```
+
+Pls keep in mind, that one should keep the firewall down for the port
+51000 in order to be able to connect to the target script.
+
+One can also start a script under debugger:
+```
+$ rpdb2 /home/user/test.py
+```
+
+To start the GUI for `rpdb2`, one can use command `winpdb`.
 
 pyrasite
 ========
 
-td
+One of the most important debugging technics, since it can be used to
+get traces from running processes without need to modify the code or
+even restart the process:
+```
+$ pyrasite <pid> <payload>
+```
+
+The `payload` Python code will be injected and executed in the target
+process. Please keep in mind, that if you plan to use prints in the
+payload, the target's `stdout` and `stderr` files will be used.
+
+To print something in the local console, you should run `pyrasite-shell`
+and just paste the corresponding payload:
+```
+$ pyrasite-shell 2487
+Pyrasite Shell 2.0
+Connected to '/usr/bin/python2 /home/user/test.py'
+Python 2.7.5 (default, Apr 10 2015, 08:09:05)
+[GCC 4.8.3 20140911 (Red Hat 4.8.3-7)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(DistantInteractiveConsole)
+
+>>> import sys, traceback
+>>>
+>>> for thread, frame in sys._current_frames().items():
+...     print('Thread 0x%x' % thread)
+...     traceback.print_stack(frame)
+...     print()
+...
+
+```
 
 Corner cases
 ------------
 
-td
+* eventlet debug
+* ...
