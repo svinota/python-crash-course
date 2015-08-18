@@ -1,5 +1,5 @@
 python debug technics, different perspectives
----------------------------------------------
+=============================================
 
 1. Runtime perspective
     1. Post-mortem analysis [p]
@@ -21,10 +21,10 @@ Python modules:
 [s,n] pyrasite
 
 Modules and tools
------------------
+=================
 
 logging
-=======
+-------
 
 Why not `print()`? Often it is simpler to use the `print()` call
 to dump variables and runtime marks. But the `print()` call should
@@ -44,7 +44,7 @@ To turn them on, one should use `logging.basicConfig()`:
 ```
 
 traceback
-=========
+---------
 
 The typical usage of the `traceback` module is the `try … except`
 statement:
@@ -71,7 +71,7 @@ tracebacks while in the process:
 ```
 
 gc, meliae
-==========
+----------
 
 Though Python is a memory-safe language, in some complex project
 one can forget to unlink objects, thus having a memory leaks. All
@@ -106,7 +106,7 @@ gc map into a json file and/or load and analyze it:
 ```
 
 pdb, rpdb2
-==========
+----------
 
 There are several Python debuggers, but mostly known are `pdb` and
 `rpdb2`. They both have similar approach and similar technics, but
@@ -171,7 +171,7 @@ $ rpdb2 /home/user/test.py
 To start the GUI for `rpdb2`, one can use command `winpdb`.
 
 pyrasite
-========
+--------
 
 One of the most important debugging technics, since it can be used to
 get traces from running processes without need to modify the code or
@@ -206,7 +206,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 Corner cases
-------------
+============
 
 * eventlet debug
 * ...
