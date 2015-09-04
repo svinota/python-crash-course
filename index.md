@@ -19,6 +19,7 @@ Python modules:
 [d,i] pdb
 [d,i] rpdb2
 [s,n] pyrasite
+[s,n] byteplay
 
 Modules and tools
 =================
@@ -205,8 +206,35 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ```
 
+byteplay
+--------
+
+Byteplay is a module that helps to manipulate the compiled bytecode.
+It can be used to inspect live code objects (frames, functions etc.)
+as well as to change them on the fly. The most important class in the
+module is `Code`:
+```
+>>> from byteplay import *
+>>> from pprint import pprint
+>>> import re  # as an example
+>>> c = Code.from_code(re.match.func_code)
+>>> pprint(c.code)
+[(SetLineno, 141),
+ (LOAD_GLOBAL, '_compile'),
+ (LOAD_FAST, 'pattern'),
+ (LOAD_FAST, 'flags'),
+ (CALL_FUNCTION, 2),
+ (LOAD_ATTR, 'match'),
+ (LOAD_FAST, 'string'),
+ (CALL_FUNCTION, 1),
+ (RETURN_VALUE, None)]
+```
+
+To work with byteplay, one should know some Python internals, but since
+it is all documented, it is not so difficult.
+
 Corner cases
 ============
 
-* eventlet debug
+* eventlet debug !
 * ...
