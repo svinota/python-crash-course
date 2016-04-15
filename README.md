@@ -1,2 +1,2 @@
-# pydebug
-Short introduction course into different Python debug technics
+# python-crash-course
+Short introduction course into Python
