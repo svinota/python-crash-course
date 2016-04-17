@@ -5,3 +5,4 @@ python-flake8
 gdb
 winpdb
 pyrasite
+Cython

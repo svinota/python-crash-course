@@ -11,4 +11,4 @@ if [ ! -z "$apt" ]; then {
 } elif [ ! -z "$yum" ]; then {
     sudo $yum install `cat requirements-fedora`
 } fi
-sudo pip install `cat requirements-pip`
+sudo pip install -U -r requirements-pip
