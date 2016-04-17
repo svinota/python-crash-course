@@ -8,3 +8,4 @@ pyrasite
 Cython
 python-devel
 gcc
+redhat-rpm-config
