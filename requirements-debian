@@ -6,3 +6,4 @@ gdb
 winpdb
 cython
 python-dev
+gcc
