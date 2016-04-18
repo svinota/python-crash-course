@@ -6,6 +6,7 @@ python debug technics, different perspectives
     2. Runtime analysis
         1. step-by-step debug [d]
         2. one-shot analysis [s]
+        3. cumulative data [c]
 2. Code change perspective
     1. Invasive — requires code change [i]
     2. Non-invasive — doesn't require any code change [n]
@@ -20,6 +21,9 @@ Python modules:
 * [d,i] rpdb2
 * [s,n] pyrasite
 * [s,n] byteplay
+* [c,i] line_profiler
+* [c,i] memory_profiler
+* [s,i] objgraph
 
 Modules and tools
 =================
@@ -232,6 +236,48 @@ module is `Code`:
 
 To work with byteplay, one should know some Python internals, but since
 it is all documented, it is not so difficult.
+
+line_profiler
+-------------
+
+Easy-to-use line profiler. Requires code change. Maybe not the most
+precise, but very useful in case of the bottleneck hunt. In order to use
+it is enough just to add a decorator to the function you want to trace,
+the profiler will inject the needed code to do the work:
+```
+###
+# func.py
+###
+@profile
+def func(x):
+    while not enough:
+        do_useful(stuff)
+        do_again()
+
+...
+
+# to run the code:
+kernprof -l -v func.py
+```
+
+memory_profiler
+---------------
+
+Almost the same as for the `line_profiler`, but reports the memory
+consumption, not the time. To run the code with decorators in place:
+```
+python -m memory_profiler func.py
+```
+
+objgraph
+--------
+
+The module allows to draw memory graphs:
+
+```
+>>> import objgraph
+>>> objgraph.show_backref(obj, filename="test.png")
+```
 
 Corner cases
 ============
